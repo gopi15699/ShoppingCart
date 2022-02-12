@@ -1,0 +1,77 @@
+<div class="w3l_banner_nav_right">
+    <!-- login -->
+            <div class="w3_login">
+                <h3>Sign In & Sign Up</h3>
+                <div class="w3_login_module">
+                    <div class="module form-module">
+                      <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+                        <div class="tooltip">Click Me</div>
+                      </div>
+                      <div class="form">
+                        <h3>Login to your account</h3>
+                        {{info}}
+                        <form (submit)="doLogin()" [formGroup]="signin" method="post">
+                          <div class="form-group">
+                            <input type="text" name="Username" placeholder="Username"  formControlName = "username">
+                            <p class="alert alert-danger" 
+                            *ngIf = "usrnme.invalid && usrnme.touched">
+                                Enter Valid username
+                            </p>
+                          </div>
+                          <div class="form-group">
+                          <input type="password" name="Password" placeholder="Password"  formControlName = "userpassword">
+                          <p class="alert alert-danger"
+                          *ngIf = "usrmail.errors?.pattern && usrmail.touched" >
+                              Enter Valid password
+                          </p>
+                        </div>
+                          <input type="submit" [disabled] = "signin.invalid" value="Login">
+                        </form>
+                      </div>
+                      <div class="form">
+                        <h2>Create an account</h2>
+                        {{info}}
+                        <form (submit)="signupForm(data)" #data="ngForm">
+                         <div class="form-group">
+                           <input type="text" class="form-control" name="Username" ngModel placeholder="Username"
+                           #username="ngModel" required>
+                           <p class="alert alert-danger" *ngIf = "username.invalid && username.touched">
+                             Enter valid name!
+                           </p>
+                           </div>
+                           <div class="form-group">
+                           <input type="password" class="form-control" name="Password" ngModel placeholder="Password" 
+                              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" #password="ngModel">
+                          <!-- {{password.errors | json}} -->
+                          <p class="alert alert-danger" *ngIf = "(password.errors?.pattern || password.touched) && password.invalid">
+                            Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
+                          </p>
+                           </div>
+                          <div class="form-group">
+                           <input type="email" class="form-control" name="Email" ngModel placeholder="Email Address"
+                            required email #ma="ngModel">
+                           <p class="alert alert-danger" *ngIf = "(ma.errors?.email || ma.touched)&& ma.invalid">
+                             Enter Valid mail
+                           </p>
+                          </div>
+                          <div class="form-group">
+                           <input type="text" class="form-control" name="Phone" ngModel placeholder="Phone Number" 
+                           required pattern="^(0|[1-9][0-9]*)$" #call = "ngModel">
+                           <p class="alert alert-danger" *ngIf="call.errors?.pattern">
+                              Enter a valid phone number
+                           </p>
+                          </div>
+                          <div>
+                           <input type="submit" [disabled]="data.invalid" value="Register" >
+                          </div>
+                        
+                        </form>
+                      </div>
+                      <div class="cta"><a href="#">Forgot your password?</a></div>
+                    </div>
+                </div>
+                
+            </div>
+    <!-- //login -->
+            </div>
+            <div class="clearfix"></div>
